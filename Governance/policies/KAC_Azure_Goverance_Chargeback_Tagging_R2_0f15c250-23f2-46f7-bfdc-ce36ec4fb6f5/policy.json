@@ -1,0 +1,137 @@
+{
+ "properties": {
+  "displayName": "KAC Azure Goverance Chargeback Tagging R2",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Created by: Matthew Koozer (mkoozer@komatsuna.com)\nCreatedy on: 2020-09-10",
+  "metadata": {
+   "category": "KAC Azure Goverance",
+   "createdBy": "356625df-50e1-4716-a6d1-b6f21cfc69d7",
+   "createdOn": "2020-09-10T17:27:26.2055091Z",
+   "updatedBy": "356625df-50e1-4716-a6d1-b6f21cfc69d7",
+   "updatedOn": "2020-09-17T15:04:32.7526781Z"
+  },
+  "parameters": {
+   "Company": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Company",
+     "description": "Komatsu company ‘hosting’ the services. Example: KAC, KMC, KLTD, KDB, KAL"
+    }
+   },
+   "Department": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Department",
+     "description": "Department responsible for charge back by Russ Walker"
+    }
+   },
+   "Code": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Code",
+     "description": "Cost Center / department code responsible for chargeback"
+    }
+   },
+   "Production": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Production",
+     "description": "Production: Yes or No"
+    }
+   },
+   "IT Owner": {
+    "type": "String",
+    "metadata": {
+     "displayName": "IT Owner",
+     "description": "Enter Name and Email(UPN) of IT Owner"
+    }
+   },
+   "Business Owner": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Business Owner",
+     "description": "Enter Name and Email(UPN) of Business Owner"
+    }
+   },
+   "Technical Contact": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Technical Contact",
+     "description": "Enter Name and Email(UPN) of Technical Contact"
+    }
+   },
+   "Project": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Project",
+     "description": "Enter Project Name or N/A if not associated with a project"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Company'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Department'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Code'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Production'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('IT Owner'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Business Owner'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Technical Contact'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Project'), ']')]",
+       "exists": "true"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/755606ae-b4de-4f65-b3bc-2811e9761e3d/providers/Microsoft.Authorization/policyDefinitions/0f15c250-23f2-46f7-bfdc-ce36ec4fb6f5",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "0f15c250-23f2-46f7-bfdc-ce36ec4fb6f5"
+}

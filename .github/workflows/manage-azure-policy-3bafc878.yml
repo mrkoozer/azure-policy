@@ -1,0 +1,21 @@
+name: manage-azure-policy-3bafc878
+on:
+  push:
+    paths:
+      - 'Governance/policies/KAC_Azure_Goverance_Chargeback_Tagging_R2_0f15c250-23f2-46f7-bfdc-ce36ec4fb6f5/**'
+      - .github/workflows/manage-azure-policy-3bafc878.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_3bafc878}}
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          Governance/policies/KAC_Azure_Goverance_Chargeback_Tagging_R2_0f15c250-23f2-46f7-bfdc-ce36ec4fb6f5/**
